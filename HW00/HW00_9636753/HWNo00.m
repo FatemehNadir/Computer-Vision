@@ -1,0 +1,36 @@
+clc;clear;close all;
+
+image_01 = imread('Test_00.ppm');
+imshow(image_01,[]);
+title('pic1', 'FontSize', 15 ,'Color','b');
+
+
+file_data = fopen('Test_00.ppm');
+new_16 = fread(file_data,16,'uint8');
+mydata = fread(file_data,'uint8');
+
+k=1;
+image_02 = zeros(852,1282,3);
+
+
+for x=1:852
+    for y=1:1282
+        for z=1:3
+            image_02(x,y,z) = mydata(k);
+            k = k+1;
+        end
+    end
+end
+
+image_02 = uint8(image_02);
+imshow(image_02)
+title('pic2', 'FontSize', 15,'Color','b');
+
+newImg = cat(2,image_01,image_02);
+imshow(newImg)
+title('image No1 : imread result                          image No2 : read and show ppm result', 'FontSize', 15,'Color','b');
+
+
+
+
+
